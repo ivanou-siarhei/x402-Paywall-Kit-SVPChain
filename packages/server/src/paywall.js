@@ -80,15 +80,20 @@ export function paywall(opts, handler) {
       return res.status(402).json(v1);
     }
 
-    const verifyRes = await fetchFn(`${facilitatorUrl}/verify`, {
-      method: 'POST', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        x402Version: 2,
-        paymentPayload: parsed.paymentPayload,
-        paymentRequirements,
-      }),
-    });
-    const check = await verifyRes.json();
+    let check;
+    try {
+      const verifyRes = await fetchFn(`${facilitatorUrl}/verify`, {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          x402Version: 2,
+          paymentPayload: parsed.paymentPayload,
+          paymentRequirements,
+        }),
+      });
+      check = await verifyRes.json();
+    } catch (e) {
+      return res.status(503).json({ error: `facilitator unreachable: ${e.cause?.message ?? e.message}` });
+    }
     if (!check.isValid) {
       res.set('PAYMENT-REQUIRED', b64e(v2));
       return res.status(402).json({ ...v1, error: `Invalid payment: ${check.invalidReason}` });

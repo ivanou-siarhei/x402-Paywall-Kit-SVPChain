@@ -58,6 +58,17 @@ test('invalid payment -> 402 with reason', async () => {
   assert.match(res.body.error, /amount mismatch/);
 });
 
+test('facilitator down -> 503, no crash', async () => {
+  const mw = paywall({
+    price: '0.01', asset: 'USDV', payTo: PAY_TO,
+    fetchFn: async () => { throw new Error('down', { cause: new Error('ECONNREFUSED') }); },
+  }, async () => ({ never: true }));
+  const { b64e } = await import('../src/common.js');
+  const res = fakeRes();
+  await mw(req({ 'x-payment': b64e({ x402Version: 1, scheme: 'exact', payload: {} }) }), res, () => {});
+  assert.equal(res.code, 503);
+  assert.match(res.body.error, /facilitator unreachable/);
+});
 test('resourceHashFor binds method+path (ignores query)', async () => {
   const a = resourceHashFor('GET', '/api/price?x=1');
   const b = resourceHashFor('get', '/api/price');

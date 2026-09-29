@@ -1,0 +1,14 @@
+{
+  "name": "@svp402/example-price-api",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "serve": "node server.js",
+    "buyer:ts": "node buyer-ts.mjs",
+    "demo": "node demo.mjs"
+  },
+  "dependencies": {
+    "ethers": "^6.13.4"
+  }
+}

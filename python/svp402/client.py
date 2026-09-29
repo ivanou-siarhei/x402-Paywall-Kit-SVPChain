@@ -98,7 +98,9 @@ def _sign_typed(signer, domain: dict, types: dict, primary: str, message: dict) 
         "primaryType": primary,
         "message": message,
     })
-    return signer.sign_message(msg).signature.hex()
+    sig = signer.sign_message(msg).signature
+    hexsig = sig.hex() if isinstance(sig, bytes) else bytes(sig).hex()
+    return "0x" + hexsig  # ethers/viem require 0x-prefixed signatures
 
 
 class SvpPayingClient:
