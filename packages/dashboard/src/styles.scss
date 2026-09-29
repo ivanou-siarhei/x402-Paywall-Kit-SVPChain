@@ -1,0 +1,198 @@
+// Plain SCSS, no Tailwind (project constraint). Dark dev-console theme.
+$bg: #0d1117;
+$panel: #161b22;
+$border: #30363d;
+$text: #e6edf3;
+$muted: #8b949e;
+$accent: #58a6ff;
+$green: #3fb950;
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: $bg;
+  color: $text;
+  font-family: -apple-system, 'Segoe UI', sans-serif;
+}
+
+.app {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 24px;
+
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    h1 {
+      font-size: 20px;
+      margin: 0;
+    }
+  }
+
+  nav {
+    display: flex;
+    gap: 8px;
+    margin: 20px 0;
+
+    button {
+      background: $panel;
+      color: $text;
+      border: 1px solid $border;
+      border-radius: 8px;
+      padding: 8px 16px;
+      cursor: pointer;
+      text-transform: capitalize;
+
+      &.active {
+        border-color: $accent;
+        color: $accent;
+      }
+    }
+  }
+}
+
+.muted { color: $muted; font-weight: normal; font-size: 14px; }
+.mono { font-family: ui-monospace, monospace; font-size: 13px; }
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 12px;
+}
+
+.card {
+  background: $panel;
+  border: 1px solid $border;
+  border-radius: 12px;
+  padding: 16px;
+
+  .card-title { font-family: ui-monospace, monospace; margin-bottom: 8px; }
+
+  .card-row {
+    display: flex;
+    justify-content: space-between;
+    margin: 4px 0;
+    color: $muted;
+
+    b { color: $text; }
+    .live { color: $green; }
+    .paused { color: #d29922; }
+  }
+}
+
+.btn {
+  background: $accent;
+  color: #04121f;
+  border: 0;
+  border-radius: 8px;
+  padding: 8px 14px;
+  cursor: pointer;
+  font-weight: 600;
+
+  &.btn-ghost {
+    background: transparent;
+    color: $muted;
+    border: 1px solid $border;
+    margin-left: 8px;
+  }
+}
+
+.wallet { display: flex; align-items: center; gap: 4px; }
+
+.toolbar {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin: 12px 0;
+
+  select, .total { font-size: 14px; }
+
+  select {
+    background: $panel;
+    color: $text;
+    border: 1px solid $border;
+    border-radius: 8px;
+    padding: 6px 10px;
+  }
+}
+
+.bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+  min-height: 150px;
+  background: $panel;
+  border: 1px solid $border;
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.bar-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+
+  span { font-size: 11px; color: $muted; }
+}
+
+.bar {
+  width: 28px;
+  background: $accent;
+  border-radius: 4px 4px 0 0;
+  min-height: 4px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 8px;
+
+  th, td {
+    text-align: left;
+    padding: 8px 10px;
+    border-bottom: 1px solid $border;
+    font-size: 14px;
+  }
+
+  th { color: $muted; font-weight: 500; }
+  a { color: $accent; }
+}
+
+label {
+  display: block;
+  margin: 12px 0;
+  color: $muted;
+}
+
+.input {
+  display: block;
+  width: 100%;
+  margin-top: 6px;
+  background: $panel;
+  border: 1px solid $border;
+  border-radius: 8px;
+  color: $text;
+  padding: 10px 12px;
+}
+
+.radio-row {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  margin: 12px 0;
+
+  label { display: flex; gap: 6px; align-items: center; margin: 0; color: $text; }
+}
+
+.snippet {
+  background: $panel;
+  border: 1px solid $border;
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 13px;
+  overflow-x: auto;
+}
