@@ -1,0 +1,12 @@
+{
+  "name": "svp402-paywall-kit",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "check:tokens": "node scripts/check-tokens.mjs"
+  }
+}
