@@ -63,6 +63,8 @@ test('resourceHashFor binds method+path (ignores query)', async () => {
   const b = resourceHashFor('get', '/api/price');
   assert.equal(a, b);
   assert.notEqual(a, resourceHashFor('POST', '/api/price'));
+  // pinned cross-language value (python/tests/test_client.py asserts the same)
+  assert.equal(a, '0xa92981978b949f943cd2da1b28a9ea8f383dfd313972e68dcef27a8918102975');
 });
 
 test('buildRequirements USDC extra carries settlement address', async () => {
